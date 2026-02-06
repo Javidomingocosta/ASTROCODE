@@ -93,8 +93,8 @@ header{
 }
 
 .logo img{
-  width:90%;
-  height:90%;
+  width:110%;
+  height:110%;
   object-fit:contain;
   filter: drop-shadow(0 0 6px rgba(140,180,255,.45));
 }
@@ -155,7 +155,7 @@ h1{
 .lead{
   margin:0;
   color:var(--muted);
-  max-width:72ch;
+  /* max-width:72ch; */
   font-size:16px;
   line-height:1.65;
 }
