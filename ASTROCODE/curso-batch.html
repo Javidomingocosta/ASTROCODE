@@ -26,8 +26,8 @@
         <a href="msdos.html">Historia MS-DOS</a>
         <a href="curso-batch.html">Curso Batch</a>
         <a href="mantenimiento.html">Mantenimiento PC</a>
-        <a href="juego.html">Juego</a>
         <a href="scanner.html">Scanner (SFC)</a>
+        <a href="juego.html">Juego</a>
         <a href="descargas.html">Descargas</a>
         <a href="certificado.html">Reto & Diploma</a>
       </nav>
@@ -38,8 +38,7 @@
     <section class="hero">
       <h1>Curso de <span style="text-shadow:0 0 24px rgba(140,180,255,.18)">Batch</span> </h1>
       <p class="lead">
-        Este curso está diseñado para que puedas añadir más módulos o incluso otro curso completo después.
-        Cada módulo trae explicación corta + ejemplo + descarga.
+        Primeros pasos en el universo Batch: aprende a crear tus propios scripts con menús y funciones. ¡Automatiza tareas y diviértete programando en cmd.exe!
       </p>
     </section>
 
@@ -77,10 +76,10 @@
       <h2>Módulo 1 — Hola Mundo y estructura</h2>
       <p>Conceptos: <span class="badge">@echo off</span> <span class="badge">echo</span> <span
           class="badge">pause</span></p>
-      <pre><code>@echo off
-title ASTROCODE - Hola Mundo
-echo Hola, universo.
-pause</code></pre>
+<pre><code>@echo off                           // Evita mostrar los comandos en pantalla
+title ASTROCODE - Hola Mundo        // Título de la ventana
+echo Hola, universo.                // Muestra un mensaje
+pause                               // Espera a que el usuario pulse una tecla para cerrar</code></pre>
       <div class="actions">
         <a class="btn primary" href="assets/batch/01-hola-mundo.bat" download>Descargar ejemplo</a>
       </div>
@@ -91,8 +90,8 @@ pause</code></pre>
       <p>Conceptos: <span class="badge">set</span> <span class="badge">%variable%</span> <span class="badge">set
           /p</span></p>
       <pre><code>@echo off
-set /p nombre=Como te llamas? 
-echo Encantado, %nombre%.
+set /p nombre=Como te llamas?       // Pide al usuario que escriba su nombre y lo guarda en la variable %nombre%
+echo Encantado, %nombre%.           // Usa la variable para mostrar un mensaje personalizado
 pause</code></pre>
       <div class="actions">
         <a class="btn primary" href="assets/batch/02-variables.bat" download>Descargar ejemplo</a>
@@ -104,10 +103,10 @@ pause</code></pre>
       <p>Conceptos: <span class="badge">if</span> <span class="badge">if exist</span> <span
           class="badge">comparaciones</span></p>
       <pre><code>@echo off
-set archivo=readme.txt
-if exist "%archivo%" (
-  echo Encontrado: %archivo%
-) else (
+set archivo=readme.txt               // Define el nombre del archivo a verificar
+if exist "%archivo%" (               // Verifica si el archivo existe en la carpeta actual
+  echo Encontrado: %archivo%         
+) else (                             //Si existe, muestra un mensaje. Si no, muestra otro mensaje.
   echo No existe: %archivo%
 )
 pause</code></pre>
@@ -120,8 +119,8 @@ pause</code></pre>
       <h2>Módulo 4 — Bucles (FOR)</h2>
       <p>Conceptos: <span class="badge">for</span> <span class="badge">%%i</span> <span class="badge">do</span></p>
       <pre><code>@echo off
-echo Listando .txt en la carpeta actual:
-for %%i in (*.txt) do echo - %%i
+echo Listando .txt en la carpeta actual:    // Muestra un mensaje por pantalla
+for %%i in (*.txt) do echo - %%i            // Recorre cada archivo .txt del directorio actual y muestra su nombre
 pause</code></pre>
       <div class="actions">
         <a class="btn primary" href="assets/batch/04-bucles.bat" download>Descargar ejemplo</a>
@@ -133,32 +132,32 @@ pause</code></pre>
       <p>Conceptos: <span class="badge">choice</span> <span class="badge">errorlevel</span> <span
           class="badge">goto</span></p>
       <pre><code>@echo off
-:menu
-cls
-echo 1) Opcion A
-echo 2) Opcion B
+:menu                           // Etiqueta para el menú, a la que se puede saltar con goto
+cls                             // Limpia la pantalla para mostrar el menú limpio cada vez
+echo 1) Opcion A                
+echo 2) Opcion B                // Muestra las opciones del menú
 echo 3) Salir
-choice /c 123 /n /m "Elige: "
+choice /c 123 /n /m "Elige: "   // Muestra un mensaje y espera a que el usuario pulse 1, 2 o 3. 
 if errorlevel 3 goto fin
-if errorlevel 2 goto b
+if errorlevel 2 goto b          // Segun la elección, salta a la etiqueta correspondiente
 if errorlevel 1 goto a
 
-:a
+:a                             
 echo Elegiste A
 pause
 goto menu
 
-:b
-echo Elegiste B
-pause
-goto menu
+:b                              // etiqueta
+echo Elegiste B                 // Muestra Texto por pantalla
+pause                           // Espera a que el usuario pulse una tecla
+goto menu                       // Vuelve a la etiqueta del menu
 
 :fin
-echo Adios
+echo Adios                     
 pause</code></pre>
       <div class="actions">
         <a class="btn primary" href="assets/batch/05-menus.bat" download>Descargar ejemplo</a>
-        <a class="btn" href="descargas.html">Ver programas reales (mantenimiento/juego)</a>
+        <a class="btn" href="descargas.html">Ver programas reales</a>
       </div>
     </section>
     

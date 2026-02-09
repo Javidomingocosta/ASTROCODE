@@ -12,9 +12,18 @@
   const scripts = {
     "curso-batch.html": [
       "¡Bienvenido a <b>AstroCode</b>! Soy AstroBot. Hoy aprenderás Batch sin perderte en el vacío.",
-      "Tip: en Batch, <code>@echo off</code> oculta los comandos para que el output sea más limpio.",
+
+      "Échale un ojo a esta guía de Batch y, cuando te sientas listo, te propongo unos pequeños retos.",
+
+      "Reto Módulo 1: abre el ejemplo y cambia el texto del <code>echo</code> para que diga “Hola, AstroCode”.",
+
       "Misión: descarga el ejemplo del Módulo 2 y cambia el mensaje final para que te salude por tu nombre.",
-      "Si te lías con los menús, ve al <b>Módulo 5</b>: ahí está la plantilla de <code>choice</code> + <code>errorlevel</code>."
+
+      "Reto Módulo 3: cambia el nombre del archivo que se comprueba por uno que exista en tu carpeta.",
+
+      "Reto Módulo 4: modifica el bucle para que liste archivos <code>.bat</code> en lugar de <code>.txt</code>.",
+
+      "Reto Módulo 5: cambia los textos del menú por otros a tu gusto (por ejemplo: Jugar, Ayuda, Salir)."
     ],
     "mantenimiento.html": [
       "Bienvenido al taller de mantenimiento. Vamos a construir un menú por opciones (MantenimientoV.2.bat).",

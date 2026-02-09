@@ -18,7 +18,8 @@ echo 6. Vaciar la papelera de reciclaje 🗑️
 echo 7. Copia de seguridad
 echo 8. Reparar Disco
 echo 9. Abrir Scanner
-echo 10. Salir
+echo 10. Reparar imagen de Windows(DISM)
+echo 11. Salir
 echo =================================
 set /p opcion="Selecciona una opción (1-10): "
 
@@ -31,7 +32,8 @@ if "%opcion%" == "6" goto vaciar_papelera
 if "%opcion%" == "7" goto copia_seguridad
 if "%opcion%" == "8" goto :reparar_disco 
 if "%opcion%" == "9" goto :abrir_scanner
-if "%opcion%" == "10" goto exit
+if "%opcion%" == "10" goto :DISM
+if "%opcion%" == "11" goto exit
 
 
 :limpiar_temporales
@@ -127,6 +129,9 @@ goto inicio
 :abrir_scanner
 call Scanner.bat
 
+
+:DISM
+call Reparacionimagen.bat
 
 :exit
 exit

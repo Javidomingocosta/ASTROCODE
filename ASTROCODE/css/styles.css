@@ -497,3 +497,31 @@ input[type="text"]:focus{
   100% { transform: translateY(0); }
 }
 .astrobot .bot{ animation: floaty 3.2s ease-in-out infinite; }
+
+/* Visor de imágenes (modal) */
+#visorImagen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.78);
+  display: none;              /* se activa con JS */
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+#visorImagen img {
+  max-width: 92vw;
+  max-height: 86vh;
+  border-radius: 12px;
+}
+
+#cerrarImagen {
+  position: absolute;
+  top: 16px;
+  right: 22px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+
