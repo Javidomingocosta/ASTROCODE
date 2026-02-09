@@ -33,7 +33,7 @@
 
   <main class="container">
     <section class="hero">
-      <h1>Reparacionimagen.bat (DISM: reparar la imagen de Windows)</h1>
+      <h1>DISM: reparar la imagen de Windows</h1>
       <p class="lead">
         Este script es un submenú para ejecutar <b>DISM</b> (Deployment Image Servicing and Management).
         DISM sirve para <b>comprobar y reparar la imagen interna de Windows</b> (la “base” que usa el sistema para restaurar archivos).
@@ -120,9 +120,6 @@ sfc /scannow</code></pre>
 
 :volver
   call Mantenimiento.bat</code></pre>
-      <p class="small">
-        Nota: si algún día quieres un “offline real”, DISM se usa con <code>/Image:X:\</code> o <code>/Source:wim:</code> (eso ya es un nivel más avanzado).
-      </p>
     </section>
 
     <section class="section">
@@ -130,12 +127,7 @@ sfc /scannow</code></pre>
       <p>Para que el flujo sea limpio, el mantenimiento lo llama así:</p>
       <pre><code>:: En Mantenimiento.bat
 :DISM
-call Reparacionimagen.bat
-goto inicio</code></pre>
-      <p class="small">
-        Si quieres que el submenú “salga y vuelva” sin abrir otro script encima, también puedes terminar con <code>exit /b</code>
-        (igual que Scanner) en lugar de llamar de vuelta a <code>Mantenimiento.bat</code>.
-      </p>
+call Reparacionimagen.bat</code></pre>
     </section>
 
     <footer class="footer">
