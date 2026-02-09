@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ASTROCODE — Reparación de imagen (DISM)</title>
+  <link rel="icon" href="assets/robot/iconastrobot.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <canvas id="universe" aria-hidden="true"></canvas>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <div class="logo">
+          <img src="assets/robot/iconastrobot.png" alt="AstroBot" onerror="this.style.display='none'">
+        </div>
+        <span>ASTROCODE</span>
+      </a>
+      <nav class="navlinks" aria-label="Navegación">
+        <a href="so.html">Historia SO</a>
+        <a href="msdos.html">Historia MS-DOS</a>
+        <a href="curso-batch.html">Curso Batch</a>
+        <a href="mantenimiento.html">Mantenimiento PC</a>
+        <a href="juego.html">Juego</a>
+        <a href="descargas.html">Descargas</a>
+        <a href="certificado.html">Reto & Diploma</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Reparacionimagen.bat (DISM: reparar la imagen de Windows)</h1>
+      <p class="lead">
+        Este script es un submenú para ejecutar <b>DISM</b> (Deployment Image Servicing and Management).
+        DISM sirve para <b>comprobar y reparar la imagen interna de Windows</b> (la “base” que usa el sistema para restaurar archivos).
+        Se recomienda cuando hay errores del sistema o cuando <b>SFC</b> no consigue reparar todo.
+      </p>
+
+      <div class="actions" style="margin-top:16px">
+        <a class="btn primary" href="assets/downloads/Reparacionimagen.bat" download>⬇ Descargar Reparacionimagen.bat</a>
+        <a class="btn" href="mantenimiento.html">Volver a Mantenimiento</a>
+      </div>
+
+      <p class="small" style="margin-top:10px">
+        Recomendación: ejecutar como administrador para evitar errores de permisos y para que la reparación sea completa.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Qué es DISM y cuándo usarlo</h2>
+      <p>
+        <b>DISM</b> trabaja sobre la <b>imagen de Windows</b> (los componentes internos que el sistema usa para mantener su integridad).
+        Si esa imagen está dañada, <code>sfc /scannow</code> puede fallar o quedarse a medias.
+        Por eso, en reparaciones serias suele recomendarse el orden: <b>DISM → SFC</b>.
+      </p>
+      <pre><code>DISM /Online /Cleanup-Image /RestoreHealth
+sfc /scannow</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>Qué hace cada opción del script</h2>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="date">1 · Reparar</div>
+          <h3>Entrar al menú DISM</h3>
+          <p>
+            Desde el menú principal, la opción 1 lleva a <code>:DISM</code>, donde puedes elegir el tipo de reparación y volver sin cerrar el programa.
+          </p>
+        </div>
+
+        <div class="t-item">
+          <div class="date">DISM · Online</div>
+          <h3>Reparar el sistema en uso</h3>
+          <p>
+            Ejecuta: <code>DISM /Online /Cleanup-Image /RestoreHealth</code>.
+            Repara la imagen del <b>Windows que está arrancado</b>. Es la opción típica para arreglar errores del sistema.
+          </p>
+        </div>
+
+        <div class="t-item">
+          <div class="date">DISM · “Offline” (ruta fija)</div>
+          <h3>Ejecutar DISM desde una ruta concreta</h3>
+          <p>
+            Ejecuta DISM llamando a <code>C:\Windows\System32\Dism.exe</code>.
+            En tu BAT esta opción sigue usando <code>/Online</code>, así que en la práctica es la misma reparación,
+            pero <b>forzando</b> el ejecutable de esa ruta.
+          </p>
+        </div>
+
+        <div class="t-item">
+          <div class="date">2 · Volver</div>
+          <h3>Volver al mantenimiento</h3>
+          <p>
+            La opción “volver” llama a <code>Mantenimiento.bat</code> con <code>call</code> para regresar al menú principal del proyecto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Cómo está construido el BAT (estructura por etiquetas)</h2>
+      <p>El script se organiza con etiquetas y saltos:</p>
+      <pre><code>:inicio
+  :: menú principal (1-2)
+
+:DISM
+  :: submenú (online / ruta fija / volver)
+
+:DISM_online
+  DISM /Online /Cleanup-Image /RestoreHealth
+  goto inicio
+
+:DISM_offline
+  "C:\Windows\System32\Dism.exe" /Online /Cleanup-Image /RestoreHealth
+  goto inicio
+
+:volver
+  call Mantenimiento.bat</code></pre>
+      <p class="small">
+        Nota: si algún día quieres un “offline real”, DISM se usa con <code>/Image:X:\</code> o <code>/Source:wim:</code> (eso ya es un nivel más avanzado).
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Integración correcta con el mantenimiento</h2>
+      <p>Para que el flujo sea limpio, el mantenimiento lo llama así:</p>
+      <pre><code>:: En Mantenimiento.bat
+:DISM
+call Reparacionimagen.bat
+goto inicio</code></pre>
+      <p class="small">
+        Si quieres que el submenú “salga y vuelva” sin abrir otro script encima, también puedes terminar con <code>exit /b</code>
+        (igual que Scanner) en lugar de llamar de vuelta a <code>Mantenimiento.bat</code>.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> ASTROCODE</div>
+    </footer>
+  </main>
+
+  <script src="js/universe.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
