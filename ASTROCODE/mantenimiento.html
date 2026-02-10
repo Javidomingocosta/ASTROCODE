@@ -246,12 +246,13 @@ goto inicio</code></pre>
           <article class="card">
             <div class="inner">
               <h3>4) Modularidad con CALL</h3>
-              <p>
-                Para scripts grandes, separa en sub-scripts y llama con
-                <code>call</code>. Ejemplo:
-                <code>call Scanner.bat</code> (Scanner se ejecuta y devuelve
-                control al mantenimiento).
-              </p>
+              <pre><code>if %errorlevel% equ 2 (
+    echo Iniciando modulo externo...
+    rem USAMOS CALL PARA PODER REGRESAR AQUÍ AL TERMINAR
+    call Mantenimiento.bat
+    goto inicio
+)
+              </code></pre>
             </div>
           </article>
         </div>
